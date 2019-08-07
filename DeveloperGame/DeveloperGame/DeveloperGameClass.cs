@@ -1,10 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 public class DeveloperGameClass
 {
+    private string _scoreBoardfile = "DeveloperGameLeaderBoard.txt";
+    private List<KeyValuePair<int, string>> _leaderBoard = new List<KeyValuePair<int, string>>();
+
     public DeveloperGameClass()
     {
-        // To do.
+        try
+        {
+            if (File.Exists(_scoreBoardfile))
+            {
+                ReadScoresFromFile();
+            }
+            else
+            {
+                FileStream stream = File.Create(_scoreBoardfile);
+                stream.Close();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"\nSomething went wrong. The following error was generated: {e.Message} Please exit the game and try again.");
+        }
     }
 
     public void Run()
@@ -28,6 +48,32 @@ public class DeveloperGameClass
                 return;
             }
         }
+    }
+
+    private void ReadScoresFromFile()
+    {
+        StreamReader reader = File.OpenText(_scoreBoardfile);
+
+        string line = reader.ReadLine();
+
+        while (line != null)
+        {
+            string[] scoreAndName = line.Split(' ');
+
+            if (scoreAndName.Length == 2)
+            {
+                bool isItConvertible = int.TryParse(scoreAndName[0], out int result);
+
+                if (isItConvertible && !string.IsNullOrWhiteSpace(scoreAndName[1]))
+                {
+                    _leaderBoard.Add(new KeyValuePair<int, string>(result, scoreAndName[1]));
+                }
+            }
+
+            line = reader.ReadLine();
+        }
+
+        reader.Close();
     }
 
     private void PrintIntro()
