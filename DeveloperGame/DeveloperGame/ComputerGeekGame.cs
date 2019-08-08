@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class DeveloperGameClass
+public class ComputerGeekGame
 {
-    public DeveloperGameClass()
+    public ComputerGeekGame()
     {
         // To do.
     }
@@ -11,29 +11,28 @@ public class DeveloperGameClass
     {
         PrintIntro();
 
-        while (true)
+        char userMenuChoice;
+
+        do
         {
-            char userMenuChoice = GetUserMenuChoice();
+            userMenuChoice = GetUserMenuChoice(); 
 
             if (UserChoseToPlay(userMenuChoice))
             {
                 Play();
             }
-            if (UserChoseToSeeLeaderBoard(userMenuChoice))
+            else if(UserChoseToSeeLeaderBoard(userMenuChoice))
             {
                 PrintLeaderBoard();
             }
-            if (UserChoseToQuit(userMenuChoice))
-            {
-                return;
-            }
-        }
+           
+        } while (!UserChoseToQuit(userMenuChoice));
     }
 
     private void PrintIntro()
     {
-        Console.WriteLine("\nWelcome To The Ultimate Developer Game!");
-        Console.WriteLine("\nIn this game, your abilities as a developer are going to be tested. The test cosists of multiple choice and true or false questions. " +
+        Console.WriteLine("\nWelcome To Computer Geek Game!");
+        Console.WriteLine("\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
             "Try to get as many correct answers as possible in the least amount of time you can. Good luck!");
     }
 
@@ -54,7 +53,7 @@ public class DeveloperGameClass
 
         while (!IsUserMenuChoiceValid(userMenuChoice))
         {
-            Console.WriteLine("Sorry, the option you entered is not valid.Please try again!");
+            Console.WriteLine("Sorry, the option you entered is not valid. Please try again!");
             PrintMenu();
             userMenuChoice = Console.ReadLine();
         }
@@ -68,42 +67,23 @@ public class DeveloperGameClass
         {
             return false;
         }
-        else if (UserChoseToPlay(userMenuChoice[0]) || UserChoseToSeeLeaderBoard(userMenuChoice[0])|| UserChoseToQuit(userMenuChoice[0]))
-        {
-            return true;
-        }
-        else // if the user enters any other character 
-        {
-            return false;
-        }
+
+        return UserChoseToPlay(userMenuChoice[0]) || UserChoseToSeeLeaderBoard(userMenuChoice[0]) || UserChoseToQuit(userMenuChoice[0]);                
     }
 
     private bool UserChoseToPlay(char userMenuChoice)
-    {
-        if (userMenuChoice == 'P' || userMenuChoice == 'p')
-        {
-            return true;
-        }
-        return false;
+    {       
+        return userMenuChoice == 'P' || userMenuChoice == 'p';
     }
 
     private bool UserChoseToSeeLeaderBoard(char userMenuChoice)
-    {
-        if (userMenuChoice == 'L' || userMenuChoice == 'l')
-        {
-            return true;
-        }
-        return false;
+    {       
+        return userMenuChoice == 'L' || userMenuChoice == 'l';
     }
 
     private bool UserChoseToQuit(char userMenuChoice)
-    {
-        if (userMenuChoice == 'Q' || userMenuChoice == 'q')
-        {
-            return true;
-        }
-
-        return false;
+    {        
+        return userMenuChoice == 'Q' || userMenuChoice == 'q';
     }
 
     private void Play()

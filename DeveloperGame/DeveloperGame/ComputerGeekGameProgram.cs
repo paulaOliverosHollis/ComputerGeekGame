@@ -6,9 +6,9 @@ namespace DeveloperGame
     {
         static void Main()
         {
-            DeveloperGameClass gameOne = new DeveloperGameClass();
+            ComputerGeekGame game = new ComputerGeekGame();
 
-            gameOne.Run();
+            game.Run();
         }
     }
 }
