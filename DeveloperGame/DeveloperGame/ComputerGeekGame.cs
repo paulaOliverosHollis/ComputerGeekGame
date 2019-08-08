@@ -7,7 +7,7 @@ public class ComputerGeekGame
     private string _scoreBoardfile = "DeveloperGameLeaderBoard.txt";
     private List<KeyValuePair<int, string>> _leaderBoard = new List<KeyValuePair<int, string>>();
 
-    public DeveloperGameClass()
+    public ComputerGeekGame()
     {
         try
         {
