@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DeveloperGame
+namespace ComputerGeekGame
 {
-    class DeveloperGameProgram
+    class ComputerGeekGameProgram
     {
         static void Main()
         {
