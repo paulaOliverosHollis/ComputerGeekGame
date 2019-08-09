@@ -1,98 +1,151 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
-public class ComputerGeekGame
+namespace ComputerGeekGame
 {
-    public ComputerGeekGame()
+    public class ComputerGeekGame
     {
-        // To do.
-    }
+        private string _scoreBoardFileName = "ComputerGeekLeaderBoard.txt";
+        private List<Score> _leaderBoard = new List<Score>();
 
-    public void Run()
-    {
-        PrintIntro();
-
-        char userMenuChoice;
-
-        do
+        public ComputerGeekGame()
         {
-            userMenuChoice = GetUserMenuChoice(); 
-
-            if (UserChoseToPlay(userMenuChoice))
+            try
             {
-                Play();
+                if (File.Exists(_scoreBoardFileName))
+                {
+                    ReadScoresFromFile();
+                }
+                else
+                {
+                    FileStream stream = File.Create(_scoreBoardFileName);
+                    stream.Close();
+                }
             }
-            else if(UserChoseToSeeLeaderBoard(userMenuChoice))
+            catch (Exception e)
             {
-                PrintLeaderBoard();
+                Console.WriteLine($"\nSomething went wrong when trying to load the leaderboard. The following error was generated: {e.Message} Please exit the game and try again.");
             }
-           
-        } while (!UserChoseToQuit(userMenuChoice));
-    }
+        }
 
-    private void PrintIntro()
-    {
-        Console.WriteLine("\nWelcome To Computer Geek Game!");
-        Console.WriteLine("\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
-            "Try to get as many correct answers as possible in the least amount of time you can. Good luck!");
-    }
-
-    private void PrintMenu()
-    {
-        Console.WriteLine(
-            "\n\n\t\t\t*Main Menu*" +
-            "\n\t\tEnter P to start the game" +
-            "\n\t\tEnter L to see the Leader Board" +
-            "\n\t\tEnter Q to quit the game");
-    }
-
-    private char GetUserMenuChoice()
-    {
-        PrintMenu();
-
-        string userMenuChoice = Console.ReadLine();
-
-        while (!IsUserMenuChoiceValid(userMenuChoice))
+        public void Run()
         {
-            Console.WriteLine("Sorry, the option you entered is not valid. Please try again!");
+            PrintIntro();
+
+            char userMenuChoice;
+
+            do
+            {
+                userMenuChoice = GetUserMenuChoice();
+
+                if (UserChoseToPlay(userMenuChoice))
+                {
+                    Play();
+                }
+                else if (UserChoseToSeeLeaderBoard(userMenuChoice))
+                {
+                    PrintLeaderBoard();
+                }
+
+            } while (!UserChoseToQuit(userMenuChoice));
+        }
+
+        private void ReadScoresFromFile()
+        {
+            StreamReader reader = File.OpenText(_scoreBoardFileName);
+
+            string line = reader.ReadLine();
+
+            while (line != null)
+            {
+                string[] nameScoreTime = line.Split(' ');
+
+                if (nameScoreTime.Length == 3)
+                {
+                    bool isScoreConvertible = int.TryParse(nameScoreTime[1], out int scoreResult);
+                    bool isTimeConvertible = TimeSpan.TryParse(nameScoreTime[2], out TimeSpan timeResult);
+
+                    if (!string.IsNullOrWhiteSpace(nameScoreTime[0]) && isScoreConvertible && isTimeConvertible) 
+                    {
+                        _leaderBoard.Add(new Score(nameScoreTime[0], scoreResult, timeResult));
+                    }
+                }
+                
+                line = reader.ReadLine();
+            }
+
+            reader.Close();
+        }
+
+        private void PrintIntro()
+        {
+            Console.WriteLine("\nWelcome To Computer Geek Game!");
+            Console.WriteLine("\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
+                "Try to get as many correct answers as possible in the least amount of time you can. Good luck!");
+        }
+
+        private void PrintMenu()
+        {
+            Console.WriteLine(
+                "\n\n\t\t\t*Main Menu*" +
+                "\n\t\tEnter P to start the game" +
+                "\n\t\tEnter L to see the Leader Board" +
+                "\n\t\tEnter Q to quit the game");
+        }
+
+        private char GetUserMenuChoice()
+        {
             PrintMenu();
-            userMenuChoice = Console.ReadLine();
+
+            string userMenuChoice = Console.ReadLine();
+
+            while (!IsUserMenuChoiceValid(userMenuChoice))
+            {
+                Console.WriteLine("Sorry, the option you entered is not valid. Please try again!");
+                PrintMenu();
+                userMenuChoice = Console.ReadLine();
+            }
+
+            return userMenuChoice[0];
         }
 
-        return userMenuChoice[0];
-    }
-
-    private bool IsUserMenuChoiceValid(string userMenuChoice)
-    {
-        if (userMenuChoice == null || userMenuChoice == string.Empty || userMenuChoice.Length > 1)
+        private bool IsUserMenuChoiceValid(string userMenuChoice)
         {
-            return false;
+            if (userMenuChoice == null || userMenuChoice == string.Empty || userMenuChoice.Length > 1)
+            {
+                return false;
+            }
+
+            return UserChoseToPlay(userMenuChoice[0]) || UserChoseToSeeLeaderBoard(userMenuChoice[0]) || UserChoseToQuit(userMenuChoice[0]);
         }
 
-        return UserChoseToPlay(userMenuChoice[0]) || UserChoseToSeeLeaderBoard(userMenuChoice[0]) || UserChoseToQuit(userMenuChoice[0]);                
-    }
+        private bool UserChoseToPlay(char userMenuChoice)
+        {
+            return userMenuChoice == 'P' || userMenuChoice == 'p';
+        }
 
-    private bool UserChoseToPlay(char userMenuChoice)
-    {       
-        return userMenuChoice == 'P' || userMenuChoice == 'p';
-    }
+        private bool UserChoseToSeeLeaderBoard(char userMenuChoice)
+        {
+            return userMenuChoice == 'L' || userMenuChoice == 'l';
+        }
 
-    private bool UserChoseToSeeLeaderBoard(char userMenuChoice)
-    {       
-        return userMenuChoice == 'L' || userMenuChoice == 'l';
-    }
+        private bool UserChoseToQuit(char userMenuChoice)
+        {
+            return userMenuChoice == 'Q' || userMenuChoice == 'q';
+        }
 
-    private bool UserChoseToQuit(char userMenuChoice)
-    {        
-        return userMenuChoice == 'Q' || userMenuChoice == 'q';
-    }
+        private void Play()
+        {
+            Console.WriteLine("Playing");
+        }
 
-    private void Play()
-    {
-        Console.WriteLine("Playing");
-    }
-
-    private void PrintLeaderBoard()
-    {
-        Console.WriteLine("Leader Board");
+        private void PrintLeaderBoard()
+        {
+           foreach(var x in _leaderBoard)
+           {
+                Console.WriteLine($"{x.PlayerName} {x.Points} {x.Time}");
+           }
+        }
     }
 }
