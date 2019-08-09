@@ -16,9 +16,9 @@ namespace ComputerGeekGame
 
         public TimeSpan Time { get; set; }
 
-        public Score(string playerName, int points, TimeSpan time)
+        public Score(string name, int points, TimeSpan time)
         {
-            this.Name = playerName;
+            this.Name = name;
             this.Points = points;
             this.Time = time;
         }
