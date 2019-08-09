@@ -80,7 +80,7 @@ namespace ComputerGeekGame
 
         private void PrintIntro()
         {
-            Console.WriteLine("\nWelcome To Computer Geek Game!\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
+            Console.WriteLine("\nWelcome To Computer Geek Game!\n\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
                 "Try to get as many correct answers as possible in the least amount of time you can. Good luck!");
         }
 
@@ -143,9 +143,9 @@ namespace ComputerGeekGame
         {
             Console.WriteLine("\n\t|| Leader Board ||\n");
 
-            foreach (var x in _leaderBoard)
+            foreach (var playerScore in _leaderBoard)
             {
-                Console.WriteLine($"Name: {x.PlayerName} | Point(s): {x.Points} | Time: {x.Time}\n");
+                Console.WriteLine($"Name: {playerScore.PlayerName} | Point(s): {playerScore.Points} | Time: {playerScore.Time}\n");
             }
         }
     }
