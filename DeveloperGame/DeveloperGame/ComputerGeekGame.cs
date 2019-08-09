@@ -142,9 +142,11 @@ namespace ComputerGeekGame
 
         private void PrintLeaderBoard()
         {
+           Console.WriteLine("\n\t|| Leader Board||\n");
+
            foreach(var x in _leaderBoard)
            {
-                Console.WriteLine($"{x.PlayerName} {x.Points} {x.Time}");
+                Console.WriteLine($"Name: {x.PlayerName} | Point(s): {x.Points} | Time: {x.Time}\n");
            }
         }
     }
