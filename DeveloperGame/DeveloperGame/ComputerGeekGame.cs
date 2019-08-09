@@ -145,7 +145,7 @@ namespace ComputerGeekGame
 
             foreach (var playerScore in _leaderBoard)
             {
-                Console.WriteLine($"Name: {playerScore.PlayerName} | Point(s): {playerScore.Points} | Time: {playerScore.Time}\n");
+                Console.WriteLine($"Name: {playerScore.Name} | Point(s): {playerScore.Points} | Time: {playerScore.Time}\n");
             }
         }
     }

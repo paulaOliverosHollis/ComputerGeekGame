@@ -6,11 +6,11 @@ namespace ComputerGeekGame
 {
     public class Score
     {
-        private string _playerName;
+        private string _name;
         private int _points;
         private TimeSpan _time;
 
-        public string PlayerName { get; set; }
+        public string Name { get; set; }
 
         public int Points { get; set; }
 
@@ -18,7 +18,7 @@ namespace ComputerGeekGame
 
         public Score(string playerName, int points, TimeSpan time)
         {
-            this.PlayerName = playerName;
+            this.Name = playerName;
             this.Points = points;
             this.Time = time;
         }
