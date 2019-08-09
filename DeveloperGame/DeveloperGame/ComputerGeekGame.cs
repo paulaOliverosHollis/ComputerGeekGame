@@ -66,12 +66,12 @@ namespace ComputerGeekGame
                     bool isScoreConvertible = int.TryParse(nameScoreTime[1], out int scoreResult);
                     bool isTimeConvertible = TimeSpan.TryParse(nameScoreTime[2], out TimeSpan timeResult);
 
-                    if (!string.IsNullOrWhiteSpace(nameScoreTime[0]) && isScoreConvertible && isTimeConvertible) 
+                    if (!string.IsNullOrWhiteSpace(nameScoreTime[0]) && isScoreConvertible && isTimeConvertible)
                     {
                         _leaderBoard.Add(new Score(nameScoreTime[0], scoreResult, timeResult));
                     }
                 }
-                
+
                 line = reader.ReadLine();
             }
 
@@ -80,8 +80,7 @@ namespace ComputerGeekGame
 
         private void PrintIntro()
         {
-            Console.WriteLine("\nWelcome To Computer Geek Game!");
-            Console.WriteLine("\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
+            Console.WriteLine("\nWelcome To Computer Geek Game!\nIn this game, your knowledge about Computer Science history is going to be tested. The test cosists of multiple choice and true or false questions. " +
                 "Try to get as many correct answers as possible in the least amount of time you can. Good luck!");
         }
 
@@ -142,12 +141,12 @@ namespace ComputerGeekGame
 
         private void PrintLeaderBoard()
         {
-           Console.WriteLine("\n\t|| Leader Board||\n");
+            Console.WriteLine("\n\t|| Leader Board ||\n");
 
-           foreach(var x in _leaderBoard)
-           {
+            foreach (var x in _leaderBoard)
+            {
                 Console.WriteLine($"Name: {x.PlayerName} | Point(s): {x.Points} | Time: {x.Time}\n");
-           }
+            }
         }
     }
 }

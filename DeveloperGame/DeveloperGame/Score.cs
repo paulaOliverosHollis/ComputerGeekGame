@@ -4,47 +4,17 @@ using System.Text;
 
 namespace ComputerGeekGame
 {
-   public class Score
-   {
+    public class Score
+    {
         private string _playerName;
         private int _points;
         private TimeSpan _time;
-        
-        public string PlayerName
-        {
-            get
-            {
-                return _playerName;
-            }
-            set
-            {
-                _playerName = value;
-            }
-        }
 
-        public int Points
-        {
-            get
-            {
-                return _points;
-            }
-            set
-            {
-                _points = value;
-            }
-        }
+        public string PlayerName { get; set; }
 
-        public TimeSpan Time
-        {
-            get
-            {
-                return _time;
-            }
-            set
-            {
-                _time = value;
-            }
-        }
+        public int Points { get; set; }
+
+        public TimeSpan Time { get; set; }
 
         public Score(string playerName, int points, TimeSpan time)
         {
@@ -52,5 +22,5 @@ namespace ComputerGeekGame
             this.Points = points;
             this.Time = time;
         }
-   }
+    }
 }
