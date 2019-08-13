@@ -28,5 +28,10 @@ namespace ComputerGeekGame
                 Console.WriteLine(answer);
             }
         }
+
+        public bool IsTheAnswerCorrect(Answers userAnswer)
+        {
+            return userAnswer == _correctAnswer;
+        }
     }
 }

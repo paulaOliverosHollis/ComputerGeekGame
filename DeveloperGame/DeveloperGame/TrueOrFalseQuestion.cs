@@ -19,5 +19,10 @@ namespace ComputerGeekGame
 
             Console.Write("\n\tTrue or False: ");
         }
+
+        public bool IsTheAnswerCorrect(bool userAnswer)
+        {
+            return userAnswer == _correctAnswer;
+        }
     }
 }
