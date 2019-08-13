@@ -136,7 +136,7 @@ namespace ComputerGeekGame
 
         private void Play()
         {
-            Console.WriteLine("Playing");
+            
         }
 
         private void PrintLeaderBoard()
