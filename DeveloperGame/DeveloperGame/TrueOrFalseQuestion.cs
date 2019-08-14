@@ -15,9 +15,7 @@ namespace ComputerGeekGame
 
         public override void PrintQuestion()
         {
-            base.PrintQuestion();
-
-            Console.Write("\n\tTrue or False: ");
+            base.PrintQuestion();            
         }
 
         public bool IsTheAnswerCorrect(bool userAnswer)

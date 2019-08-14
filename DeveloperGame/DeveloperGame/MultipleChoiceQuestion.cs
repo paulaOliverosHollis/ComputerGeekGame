@@ -6,7 +6,7 @@ namespace ComputerGeekGame
 {
     public class MultipleChoiceQuestion : Question
     {
-        public enum Answers { A, B, C, D }
+        public enum Answers { A, B, C, D}
 
         private Answers _correctAnswer;
         private List<string> _answerOptions;
@@ -23,15 +23,33 @@ namespace ComputerGeekGame
         {
             base.PrintQuestion();
 
-            foreach (string answer in _answerOptions)
+            for(int i = 0; i < 4; i++)
             {
-                Console.WriteLine(answer);
+                Console.WriteLine((Answers)i + $". {_answerOptions[i]}");
             }
         }
 
         public bool IsTheAnswerCorrect(Answers userAnswer)
         {
             return userAnswer == _correctAnswer;
+        }
+
+        public void RandomizeAnswers()
+        {            
+            Random random = new Random();
+
+            string correctAnswer = _answerOptions[(int)_correctAnswer];
+            _answerOptions.Remove(_answerOptions[(int)_correctAnswer]);
+
+            int randomIndex = random.Next(0, 3);
+
+            string temp = _answerOptions[randomIndex];
+
+            _answerOptions[randomIndex] = correctAnswer;
+
+            _answerOptions.Add(temp);
+
+            _correctAnswer = (Answers)randomIndex;
         }
     }
 }
