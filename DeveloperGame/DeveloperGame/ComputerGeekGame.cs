@@ -195,8 +195,7 @@ namespace ComputerGeekGame
             else if (points == _leaderBoard[4].Points && completionTime < _leaderBoard[4].Time)
             {
                 UpdateLeaderBoard(points, completionTime);
-            }
-
+            } 
         }
 
         private void PrintLeaderBoard()
@@ -214,16 +213,16 @@ namespace ComputerGeekGame
             List<MultipleChoiceQuestion> tempQuestionList;
 
             tempQuestionList = _multipleChoiceQuestions;
-            _multipleChoiceQuestions = null;
+            _multipleChoiceQuestions = new List<MultipleChoiceQuestion>();
 
             while (tempQuestionList.Count > 0)
             {
                 int randomIndex = _random.Next(0, tempQuestionList.Count);
 
                 MultipleChoiceQuestion question = tempQuestionList[randomIndex];
-                _multipleChoiceQuestions.Add(question);
                 question.RandomizeAnswers();
-                tempQuestionList.Remove(question);
+                _multipleChoiceQuestions.Add(question);               
+                tempQuestionList.Remove(tempQuestionList[randomIndex]);
             }           
         }
 
@@ -232,7 +231,7 @@ namespace ComputerGeekGame
             List<TrueOrFalseQuestion> tempQuestionList;
 
             tempQuestionList = _trueOrFalseQuestions;
-            _trueOrFalseQuestions = null;
+            _trueOrFalseQuestions = new List<TrueOrFalseQuestion>();
 
             while (tempQuestionList.Count > 0)
             {
@@ -240,7 +239,7 @@ namespace ComputerGeekGame
 
                 TrueOrFalseQuestion question = tempQuestionList[randomIndex];
                 _trueOrFalseQuestions.Add(question);                
-                tempQuestionList.Remove(question);
+                tempQuestionList.Remove(tempQuestionList[randomIndex]);
             }
         }
 
