@@ -211,39 +211,36 @@ namespace ComputerGeekGame
 
         private void RandomizeMultipleChoiceQuestions()
         {
-            List<MultipleChoiceQuestion> tempQuestionList = new List<MultipleChoiceQuestion>();
+            List<MultipleChoiceQuestion> tempQuestionList;
 
-            tempQuestionList.AddRange(_multipleChoiceQuestions);
-            _multipleChoiceQuestions.Clear();
+            tempQuestionList = _multipleChoiceQuestions;
+            _multipleChoiceQuestions = null;
 
             while (tempQuestionList.Count > 0)
             {
-                int randomIndex = _random.Next(0, tempQuestionList.Count - 1);
+                int randomIndex = _random.Next(0, tempQuestionList.Count);
 
-                _multipleChoiceQuestions.Add(tempQuestionList[randomIndex]);
-                tempQuestionList.Remove(tempQuestionList[randomIndex]);
-            }
-
-            // Sort answer options in random order every time call Play()
-            foreach (var question in _multipleChoiceQuestions)
-            {
+                MultipleChoiceQuestion question = tempQuestionList[randomIndex];
+                _multipleChoiceQuestions.Add(question);
                 question.RandomizeAnswers();
-            }
+                tempQuestionList.Remove(question);
+            }           
         }
 
         private void RandomizeTrueOrFalseQuestions()
         {
-            List<TrueOrFalseQuestion> tempQuestionList = new List<TrueOrFalseQuestion>();
+            List<TrueOrFalseQuestion> tempQuestionList;
 
-            tempQuestionList.AddRange(_trueOrFalseQuestions);
-            _trueOrFalseQuestions.Clear();
+            tempQuestionList = _trueOrFalseQuestions;
+            _trueOrFalseQuestions = null;
 
             while (tempQuestionList.Count > 0)
             {
-                int randomIndex = _random.Next(0, tempQuestionList.Count - 1);
+                int randomIndex = _random.Next(0, tempQuestionList.Count);
 
-                _trueOrFalseQuestions.Add(tempQuestionList[randomIndex]);
-                tempQuestionList.Remove(tempQuestionList[randomIndex]);
+                TrueOrFalseQuestion question = tempQuestionList[randomIndex];
+                _trueOrFalseQuestions.Add(question);                
+                tempQuestionList.Remove(question);
             }
         }
 

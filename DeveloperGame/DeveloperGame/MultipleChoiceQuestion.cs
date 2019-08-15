@@ -42,7 +42,7 @@ namespace ComputerGeekGame
             string correctAnswer = _answerOptions[(int)_correctAnswer];
             _answerOptions.Remove(_answerOptions[(int)_correctAnswer]);
 
-            int randomIndex = random.Next(0, 3);
+            int randomIndex = random.Next(0, 4);
 
             //After getting a random index number, I make sure to store the string that is already in that index into a local variable. Then I replace said string with the correct answer string. 
             string temp = _answerOptions[randomIndex];
