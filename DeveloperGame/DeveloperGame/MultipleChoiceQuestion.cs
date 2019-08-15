@@ -41,7 +41,7 @@ namespace ComputerGeekGame
             {
                 // Indexes we want to swap
                 int correctIndex = (int)_correctAnswer;
-                int randomIndex = random.Next(0, 4);
+                int randomIndex = _random.Next(0, 4);
 
                 // Swap them ;)
                 string temp = _answerOptions[correctIndex];
