@@ -10,6 +10,7 @@ namespace ComputerGeekGame
 
         private Answers _correctAnswer;
         private List<string> _answerOptions;
+        private Random _random = new Random();
 
         public MultipleChoiceQuestion(string question, Answers correctAnswer,
             string answerOption1, string answerOption2, string answerOption3, string answerOption4) : base(question)
@@ -23,15 +24,32 @@ namespace ComputerGeekGame
         {
             base.PrintQuestion();
 
-            foreach (string answer in _answerOptions)
+            for (int i = 0; i < 4; i++)
             {
-                Console.WriteLine(answer);
+                Console.WriteLine((Answers)i + $". {_answerOptions[i]}");
             }
         }
 
         public bool IsTheAnswerCorrect(Answers userAnswer)
         {
             return userAnswer == _correctAnswer;
+        }
+
+        public void RandomizeAnswers()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                // Indexes we want to swap
+                int correctIndex = (int)_correctAnswer;
+                int randomIndex = _random.Next(0, 4);
+
+                // Swap them ;)
+                string temp = _answerOptions[correctIndex];
+                _answerOptions[correctIndex] = _answerOptions[randomIndex];
+                _answerOptions[randomIndex] = temp;
+
+                _correctAnswer = (Answers)randomIndex;
+            }
         }
     }
 }
