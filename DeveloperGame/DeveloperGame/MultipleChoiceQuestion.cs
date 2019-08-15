@@ -10,7 +10,7 @@ namespace ComputerGeekGame
 
         private Answers _correctAnswer;
         private List<string> _answerOptions;
-        private Random random = new Random();
+        private Random _random = new Random();
 
         public MultipleChoiceQuestion(string question, Answers correctAnswer,
             string answerOption1, string answerOption2, string answerOption3, string answerOption4) : base(question)
